@@ -42,7 +42,6 @@ services:
       - db
     ports:
       - "8081:80"
-    entrypoint: ["dockerize", "-wait", "tcp://db:3306", "-timeout", "30s", "docker-entrypoint.sh", "apache2-foreground"]
 
   gabriel:
     image: wordpress:latest

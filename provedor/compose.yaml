@@ -1,7 +1,7 @@
 services:
   dns:
     build:
-      context: ./provedor/dns
+      context: ./dns
       dockerfile: Dockerfile
     image: ubuntu-bind
     container_name: dns
@@ -11,5 +11,10 @@ services:
     networks:
       - rede-litoral
     volumes:
-      - ./provedor/dns/db.pescadores.com:/etc/bind/db.pescadores.com
-      - ./provedor/dns/named.conf.local:/etc/bind/named.conf.local
+      - ./dns/db.pescadores.com:/etc/bind/db.pescadores.com
+      - ./dns/named.conf.local:/etc/bind/named.conf.local
+
+networks:
+  rede-litoral:
+    driver: bridge
+    
