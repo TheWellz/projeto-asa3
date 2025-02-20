@@ -1,0 +1,5 @@
+zone "pescadores.com" {
+    type master;
+    file "/etc/bind/db.pescadores.com";
+    allow-transfer { 127.0.0.1; };
+};
