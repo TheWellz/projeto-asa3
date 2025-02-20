@@ -1,0 +1,43 @@
+services:
+  wordpress:
+    image: wordpress:latest
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_USER=wpuser
+      - WORDPRESS_DB_PASSWORD=wppass
+      - WORDPRESS_DB_NAME=wpdb
+    networks:
+      - asa-network
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_DATABASE=wpdb
+      - MYSQL_USER=wpuser
+      - MYSQL_PASSWORD=wppass
+      - MYSQL_RANDOM_ROOT_PASSWORD=1
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - asa-network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8088:8080"
+    depends_on:
+      - db
+    networks:
+      - asa-network
+
+networks:
+  asa-network:
+    driver: bridge
+
+volumes:
+  db:
