@@ -11,10 +11,9 @@ services:
     networks:
       - rede-litoral
     volumes:
-      - ./dns/db.pescadores.com:/etc/bind/db.pescadores.com
+      - ./dns/db.minhoto.com:/etc/bind/db.minhoto.com
       - ./dns/named.conf.local:/etc/bind/named.conf.local
 
 networks:
   rede-litoral:
     driver: bridge
-    

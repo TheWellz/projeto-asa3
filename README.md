@@ -1,4 +1,4 @@
-### 🏗 **Estrutura do Projeto**
+### 🏰 **Estrutura do Projeto**
 
 ```
 projeto-asa3/
@@ -7,15 +7,15 @@ projeto-asa3/
 │   ├── dns/
 │   │   ├── Dockerfile
 │   │   ├── named.conf.local
-│   │   ├── db.pescadores.com
+│   │   └── db.minhoto.com
 │── cliente 1/
 │   ├── compose.yaml
 │   ├── proxy/
 │   │   ├── Dockerfile
 │   │   ├── default.conf
-│   │   ├── nginx.conf
+│   │   └── nginx.conf
 │   ├── ssh/
-│   │   ├── Dockerfile
+│   │   └── Dockerfile
 ```
 
 ---
@@ -38,14 +38,14 @@ docker compose up -d --build
 
 ---
 
-## 📜 **Testes e Validação**
+## 📝 **Testes e Validação**
 
 ### 🔹 **1. Testar WordPress**
 
 - Acesse `http://localhost:8081` (Wellton)
 - Acesse `http://localhost:8082` (Gabriel)
-- Acesse `http://wellton.pescadores.com` (Wellton pelo DNS)
-- Acesse `http://gabriel.pescadores.com` (Gabriel pelo DNS)
+- Acesse `http://wellton.minhoto.com` (Wellton pelo DNS)
+- Acesse `http://gabriel.minhoto.com` (Gabriel pelo DNS)
 
 ### 🔹 **2. Testar SSH**
 
@@ -58,4 +58,4 @@ senha: redes
 
 ## ⚠️ **Observação**
 
-Lembre-se de alterar o endereço IP do servidor DNS para o IPv4 da sua máquina. Isso pode ser feito editando o arquivo `db.pescadores.com` dentro da pasta `dns`, substituindo `127.0.0.1` pelo IP correto.
+Lembre-se de alterar o endereço IP do servidor DNS para o IPv4 da sua máquina. Isso pode ser feito editando o arquivo `db.minhoto.com` dentro da pasta `dns`, substituindo `127.0.0.1` pelo IP correto.
