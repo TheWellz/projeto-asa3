@@ -54,6 +54,10 @@ ssh wellton@localhost -p 2222
 senha: redes
 ```
 
+```bash
+ssh gabriel@localhost -p 2222
+senha: redes
+```
 ---
 
 ## ⚠️ **Observação**

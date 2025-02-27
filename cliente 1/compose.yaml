@@ -28,16 +28,16 @@ services:
     image: wordpress:latest
     container_name: wellton
     environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_NAME: wordpress
-      WORDPRESS_DB_USER: user
+      WORDPRESS_DB_HOST: db_wellton:3306
+      WORDPRESS_DB_NAME: wordpress_wellton
+      WORDPRESS_DB_USER: user_wellton
       WORDPRESS_DB_PASSWORD: redes
     volumes:
       - wordpress_data_wellton:/var/www/html
     networks:
       - rede-litoral
     depends_on:
-      - db
+      - db_wellton
     ports:
       - "8081:80"
 
@@ -45,29 +45,42 @@ services:
     image: wordpress:latest
     container_name: gabriel
     environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_NAME: wordpress
-      WORDPRESS_DB_USER: user
+      WORDPRESS_DB_HOST: db_gabriel:3306
+      WORDPRESS_DB_NAME: wordpress_gabriel
+      WORDPRESS_DB_USER: user_gabriel
       WORDPRESS_DB_PASSWORD: redes
     volumes:
       - wordpress_data_gabriel:/var/www/html
     networks:
       - rede-litoral
     depends_on:
-      - db
+      - db_gabriel
     ports:
       - "8082:80"
     
-  db:
+  db_wellton:
     image: mysql:5.7
-    container_name: mysql
+    container_name: mysql_wellton
     environment:
       MYSQL_ROOT_PASSWORD: redes
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: user
+      MYSQL_DATABASE: wordpress_wellton
+      MYSQL_USER: user_wellton
       MYSQL_PASSWORD: redes
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data_wellton:/var/lib/mysql
+    networks:
+      - rede-litoral
+
+  db_gabriel:
+    image: mysql:5.7
+    container_name: mysql_gabriel
+    environment:
+      MYSQL_ROOT_PASSWORD: redes
+      MYSQL_DATABASE: wordpress_gabriel
+      MYSQL_USER: user_gabriel
+      MYSQL_PASSWORD: redes
+    volumes:
+      - db_data_gabriel:/var/lib/mysql
     networks:
       - rede-litoral
 
@@ -78,4 +91,5 @@ networks:
 volumes:
   wordpress_data_wellton:
   wordpress_data_gabriel:
-  db_data:
+  db_data_wellton:
+  db_data_gabriel:
