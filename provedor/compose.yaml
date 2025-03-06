@@ -29,8 +29,9 @@ services:
     networks:
       - rede-litoral
     volumes:
-      - ./proxy/default.conf:/etc/nginx/conf.d/default.conf
-      - ./proxy/nginx.conf:/etc/nginx/nginx.conf 
+    - ./proxy/default.conf:/etc/nginx/conf.d/default.conf
+    - ./proxy/nginx.conf:/etc/nginx/nginx.conf
+    - ./proxy/ssl-cert:/etc/nginx/ssl-cert 
     depends_on:
       - dns
     restart: always
@@ -59,8 +60,7 @@ services:
     container_name: webmail
     networks:
       - rede-litoral
-    ports:
-      - "80:80"
+
     volumes:
       - ./webmail/config.inc.php:/var/www/html/config/config.inc.php
     depends_on:
