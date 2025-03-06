@@ -1,5 +1,17 @@
+zone "rosado.com" {
+    type master;
+    file "/etc/bind/db.rosado.com";
+    allow-transfer { 127.0.0.1; };
+};
+
 zone "minhoto.com" {
     type master;
     file "/etc/bind/db.minhoto.com";
+    allow-transfer { 127.0.0.1; };
+};
+
+zone "camapum.com" {
+    type master;
+    file "/etc/bind/db.camapum.com";
     allow-transfer { 127.0.0.1; };
 };

@@ -1,0 +1,104 @@
+services:
+  proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    container_name: proxy_2
+    ports:
+      - "81:80"
+      - "444:443"
+    networks:
+      - rede-litoral
+    volumes:
+      - ./proxy/default.conf:/etc/nginx/conf.d/default.conf
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf
+      - ./proxy/ssl-cert:/etc/nginx/ssl
+    depends_on:
+      - pedro
+      - junior
+    restart: always
+
+  ssh:
+    build:
+      context: ./ssh
+      dockerfile: Dockerfile
+    container_name: ssh_2
+    ports:
+      - "2223:22"
+    networks:
+      - rede-litoral
+    restart: always
+
+  pedro:
+    image: wordpress:latest
+    container_name: pedro
+    environment:
+      WORDPRESS_DB_HOST: db_pedro:3306
+      WORDPRESS_DB_NAME: wordpress_pedro
+      WORDPRESS_DB_USER: user_pedro
+      WORDPRESS_DB_PASSWORD: redes
+    volumes:
+      - wordpress_data_pedro:/var/www/html
+    networks:
+      - rede-litoral
+    depends_on:
+      - db_pedro
+    ports:
+      - "8083:80"
+    restart: always
+
+  junior:
+    image: wordpress:latest
+    container_name: junior
+    environment:
+      WORDPRESS_DB_HOST: db_junior:3306
+      WORDPRESS_DB_NAME: wordpress_junior
+      WORDPRESS_DB_USER: user_junior
+      WORDPRESS_DB_PASSWORD: redes
+    volumes:
+      - wordpress_data_junior:/var/www/html
+    networks:
+      - rede-litoral
+    depends_on:
+      - db_junior
+    ports:
+      - "8084:80"
+    restart: always
+
+  db_pedro:
+    image: mysql:5.7
+    container_name: mysql_pedro
+    environment:
+      MYSQL_ROOT_PASSWORD: redes
+      MYSQL_DATABASE: wordpress_pedro
+      MYSQL_USER: user_pedro
+      MYSQL_PASSWORD: redes
+    volumes:
+      - db_data_pedro:/var/lib/mysql
+    networks:
+      - rede-litoral
+    restart: always
+
+  db_junior:
+    image: mysql:5.7
+    container_name: mysql_junior
+    environment:
+      MYSQL_ROOT_PASSWORD: redes
+      MYSQL_DATABASE: wordpress_junior
+      MYSQL_USER: user_junior
+      MYSQL_PASSWORD: redes
+    volumes:
+      - db_data_junior:/var/lib/mysql
+    networks:
+      - rede-litoral
+    restart: always
+
+networks:
+  rede-litoral:
+    driver: bridge
+
+volumes:
+  wordpress_data_pedro:
+  wordpress_data_junior:
+  db_data_pedro:
+  db_data_junior:

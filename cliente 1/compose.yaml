@@ -1,31 +1,39 @@
 services:
 
   proxy:
-    image: nginx:latest
-    container_name: proxy
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    container_name: proxy_1
     ports:
       - "80:80"
+      - "443:443"
     networks:
       - rede-litoral
     volumes:
       - ./proxy/default.conf:/etc/nginx/conf.d/default.conf
       - ./proxy/nginx.conf:/etc/nginx/nginx.conf
+      - ./proxy/ssl-cert:/etc/nginx/ssl
     depends_on:
       - wellton
       - gabriel
+    restart: always
 
   ssh:
     build:
       context: ./ssh
       dockerfile: Dockerfile
-    container_name: ssh
+    container_name: ssh_1
     ports:
       - "2222:22"
     networks:
       - rede-litoral
+    restart: always
 
   wellton:
-    image: wordpress:latest
+    build:
+      context: ./wordpress
+      dockerfile: Dockerfile
     container_name: wellton
     environment:
       WORDPRESS_DB_HOST: db_wellton:3306
@@ -40,9 +48,12 @@ services:
       - db_wellton
     ports:
       - "8081:80"
+    restart: always
 
   gabriel:
-    image: wordpress:latest
+    build:
+      context: ./wordpress
+      dockerfile: Dockerfile
     container_name: gabriel
     environment:
       WORDPRESS_DB_HOST: db_gabriel:3306
@@ -57,7 +68,8 @@ services:
       - db_gabriel
     ports:
       - "8082:80"
-    
+    restart: always
+
   db_wellton:
     image: mysql:5.7
     container_name: mysql_wellton
@@ -70,6 +82,7 @@ services:
       - db_data_wellton:/var/lib/mysql
     networks:
       - rede-litoral
+    restart: always
 
   db_gabriel:
     image: mysql:5.7
@@ -83,6 +96,7 @@ services:
       - db_data_gabriel:/var/lib/mysql
     networks:
       - rede-litoral
+    restart: always
 
 networks:
   rede-litoral:
