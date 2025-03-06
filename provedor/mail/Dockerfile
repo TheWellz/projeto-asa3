@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
-RUN apt update --fix-missing -y && \
-    apt upgrade -y && \
+RUN #apt update --fix-missing -y && \
+    #apt upgrade -y && \
     apt-get install -y postfix dovecot-imapd dovecot-pop3d syslog-ng
 
 RUN useradd -m -s /bin/bash wellton
