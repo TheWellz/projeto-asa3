@@ -79,7 +79,7 @@ services:
       dockerfile: Dockerfile
     container_name: ssh_provedor
     ports:
-      - "22:22"
+      - "22:2224"
     networks:
       - rede-litoral
     restart: always
