@@ -4,12 +4,12 @@ FROM roundcube/roundcubemail:latest
 # Criar diretório de configuração
 RUN mkdir -p /var/www/html/config
 
-# Copiar o arquivo de configuração para o contêiner
 COPY config.docker.inc.php /var/www/html/config/config.docker.inc.php
+COPY config.inc.php /var/www/html/config/config.inc.php
 
-# Definir permissões adequadas
 RUN chown -R www-data:www-data /var/www/html/config && \
-    chmod 644 /var/www/html/config/config.docker.inc.php
+    chmod 600 /var/www/html/config/config.inc.php && \
+    chmod 600 /var/www/html/config/config.docker.inc.php
 
 # Expor a porta do Apache
 EXPOSE 80
