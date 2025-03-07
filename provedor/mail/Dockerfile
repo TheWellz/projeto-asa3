@@ -22,4 +22,5 @@ COPY main.cf /etc/postfix/
 COPY dovecot.conf /etc/dovecot/
 
 # Iniciar os serviços
-CMD service postfix start && service dovecot start && tail -f /var/log/mail.log
+CMD service postfix start && service dovecot start && tail -f /dev/null
+

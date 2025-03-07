@@ -29,3 +29,4 @@ $config['product_name'] = 'Roundcube Webmail';  // Nome do produto (Webmail)
 $config['mail_domain'] = 'rosado.com';  // Domínio de email
 $config['imap_open_notify'] = true;  // Exibe a notificação de novas mensagens
 $config['smtp_auth_type'] = 'PLAIN';  // Tipo de autenticação SMTP
+include(__DIR__ . '/config.docker.inc.php');
