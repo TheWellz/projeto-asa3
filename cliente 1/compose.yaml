@@ -4,7 +4,7 @@ services:
     build:
       context: ./proxy
       dockerfile: Dockerfile
-    container_name: proxy_1
+    container_name: proxy_cliente1
     ports:
       - "80:80"
       - "443:443"
@@ -23,7 +23,7 @@ services:
     build:
       context: ./ssh
       dockerfile: Dockerfile
-    container_name: ssh_1
+    container_name: ssh_cliente1
     ports:
       - "2222:22"
     networks:
@@ -31,9 +31,7 @@ services:
     restart: always
 
   wellton:
-    build:
-      context: ./wordpress
-      dockerfile: Dockerfile
+    image: wordpress:latest
     container_name: wellton
     environment:
       WORDPRESS_DB_HOST: db_wellton:3306
@@ -51,9 +49,7 @@ services:
     restart: always
 
   gabriel:
-    build:
-      context: ./wordpress
-      dockerfile: Dockerfile
+    image: wordpress:latest
     container_name: gabriel
     environment:
       WORDPRESS_DB_HOST: db_gabriel:3306

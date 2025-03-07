@@ -4,11 +4,11 @@ RUN apt-get update
 RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 
-RUN useradd -m -s /bin/bash wellton
-RUN echo "wellton:redes" | chpasswd
+RUN useradd -m -s /bin/bash rosado1
+RUN echo "rosado1:redes" | chpasswd
 
-RUN useradd -m -s /bin/bash gabriel
-RUN echo "gabriel:redes" | chpasswd
+RUN useradd -m -s /bin/bash rosado2
+RUN echo "rosado2:redes" | chpasswd
 
 RUN sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
     sed -i 's/^PasswordAuthentication no/#PasswordAuthentication no/' /etc/ssh/sshd_config

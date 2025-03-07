@@ -3,7 +3,7 @@ services:
     build:
       context: ./proxy
       dockerfile: Dockerfile
-    container_name: proxy_2
+    container_name: proxy_cliente2
     ports:
       - "81:80"
       - "444:443"
@@ -22,7 +22,7 @@ services:
     build:
       context: ./ssh
       dockerfile: Dockerfile
-    container_name: ssh_2
+    container_name: ssh_cliente2
     ports:
       - "2223:22"
     networks:

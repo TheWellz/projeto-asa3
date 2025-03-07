@@ -56,13 +56,12 @@ services:
     restart: always
 
   webmail:
-    image: roundcube/roundcubemail:latest
+    build:
+      context: ./webmail
+      dockerfile: Dockerfile
     container_name: webmail
     networks:
       - rede-litoral
-
-    volumes:
-      - ./webmail/config.inc.php:/var/www/html/config/config.inc.php
     depends_on:
       - dns
       - mail
@@ -72,6 +71,7 @@ services:
       - ROUNDCUBEMAIL_DB_TYPE=sqlite
       - ROUNDCUBEMAIL_DB_DSN=sqlite:////var/www/html/roundcubemail.sqlite
     restart: always
+
 
   ssh:
     build:
