@@ -5,8 +5,8 @@ services:
       dockerfile: Dockerfile
     container_name: proxy_cliente2
     ports:
-      - "81:80"
-      - "444:443"
+      - "82:80"
+      - "445:443"
     networks:
       - rede-litoral
     volumes:
